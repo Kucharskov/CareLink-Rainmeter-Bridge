@@ -6,6 +6,12 @@ Pomost pomiędzy systemem CareLink a Rainmeterem, umożliwiający wyświetlanie 
   <img src="image.png" alt="Screenshoot">
 </p>
 
+Cały łańcuch od Pompy insulinowej aż do widgetu Rainmeter wygląda nastepująco:
+- Pompa insulinowa → CareLink - synchronizacja danych realizowana przez system CareLink firmy Medtronic.
+- CareLink → lokalne proxy - pobieranie danych za pomocą skryptu autorstwa ondrej1024.
+- Lokalne proxy → API Proxy - skrypt PHP z tego repozytorium pobiera dane i filtruje je, udostępniając wyłącznie niezbędne informacje.
+- API Proxy → Rainmeter - motyw illustro pro z widgetem Health pobiera przygotowane dane i prezentuje aktualny poziom glukozy.
+
 ## Elementy w repozytorium
 
 Projekt składa się z kilku elementów, które wspólnie tworzą łańcuch umożliwiający pobranie danych z pompy insulinowej i ich prezentację na pulpicie:
@@ -30,13 +36,6 @@ Osobiście używam tego komponentu do filtracji danych dla [https://cgm.kucharsk
 ### `Rainmeter skin/`
 
 Kompletna skórka Rainmeter oparta na stylu **illustro pro**, zmodyfikowana w celu prezentowania danych dotyczących poziomu glukozy.
-
-Poszczególne elementy odpowiadają za:
-
-* **Pompa insulinowa → CareLink** — komunikacja i synchronizacja danych realizowana przez system **Medtronic CareLink**.
-* **CareLink → lokalne proxy** — za komunikację odpowiada projekt [`carelink-python-client`](https://github.com/ondrej1024/carelink-python-client) autorstwa **ondrej1024**.
-* **Lokalne proxy → API Proxy** — znajdujący się w tym repozytorium skrypt PHP pobiera dane z lokalnego proxy i udostępnia na zewnątrz wyłącznie wybrane, przefiltrowane informacje.
-* **API Proxy → Rainmeter** — skórka Rainmeter znajdująca się w tym repozytorium regularnie odpytuje API Proxy za pomocą `Plugin=WebParser` i prezentuje aktualny poziom glukozy w czytelnej formie na pulpicie.
 
 ## Dlaczego API Proxy?
 
