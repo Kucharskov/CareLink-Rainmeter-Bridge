@@ -1,6 +1,10 @@
 # CareLink Rainmeter Bridge
 
-Bezpieczny most pomiędzy systemem CareLink a Rainmeterem, umożliwiający wyświetlanie aktualnego poziomu glukozy bezpośrednio na pulpicie systemu Windows.
+Pomost pomiędzy systemem CareLink a Rainmeterem, umożliwiający wyświetlanie aktualnego poziomu glukozy bezpośrednio na pulpicie systemu Windows.
+
+<p align="center">
+  <img src="image.png" alt="Screenshoot">
+</p>
 
 ## Elementy w repozytorium
 
@@ -10,17 +14,18 @@ Projekt składa się z kilku elementów, które wspólnie tworzą łańcuch umo�
 CareLink Rainmeter Bridge/
 │
 ├── API proxy/
-│   └── ...
 │
 └── Rainmeter skin/
     └── illustro pro/
-        └── Health/
-            └── ...
 ```
 
 ### `API proxy/`
 
 Skrypt PHP pełniący rolę bezpiecznej warstwy pośredniej pomiędzy lokalnym proxy CareLink a Rainmeterem.
+
+Podgląd moich aktualnych danych dostępny jest pod adresem [https://api.kucharskov.pl/cgm/](https://api.kucharskov.pl/cgm/) (live demo).
+
+Osobiście używam tego komponentu do filtracji danych dla [https://cgm.kucharskov.pl/](https://cgm.kucharskov.pl/) - status mojej glukozy w sieci.
 
 ### `Rainmeter skin/`
 
@@ -35,15 +40,15 @@ Poszczególne elementy odpowiadają za:
 
 ## Dlaczego API Proxy?
 
-Skrypt PHP pełni rolę dodatkowej warstwy pośredniej pomiędzy lokalnym proxy a Rainmeterem. Dzięki temu dane udostępniane przez `carelink-python-client` są tylko lokalnie, a publicznie dostępne są jedynie niektóre informacje.
+Skrypt PHP pełni rolę dodatkowej warstwy pośredniej pomiędzy lokalnym proxy a Rainmeterem. Dzięki temu dane z `carelink-python-client` są udostępniane tylko lokalnie, a publicznie dostępne są jedynie przefiltrowane informacje.
 
 ## Wymagania i instalacja
 
 Projekt zakłada działanie trzech elementów:
 
-1. lokalnego proxy `carelink-python-client`,
-2. publicznie dostępnego API Proxy w PHP,
-3. skórki Rainmeter.
+1. Lokalnego proxy `carelink-python-client`
+2. Publicznie dostępnego API Proxy w PHP
+3. Skórki Rainmeter
 
 ### 1. Lokalne proxy CareLink
 
@@ -87,18 +92,16 @@ Przykładowa lokalizacja:
 ...\Dokumenty\Rainmeter\Skins\illustro pro\Health
 ```
 
-Po skopiowaniu motywu należy otworzyć plik ``Health mod.ini``
-
-i zmienić wartość:
+Po skopiowaniu motywu należy otworzyć plik ``Health mod.ini`` i zmienić wartość:
 
 ```ini
-UrlAPI=...
+UrlAPI=[...](https://example.com/api.php)
 ```
 
 na adres WWW własnego API Proxy, np.:
 
 ```ini
-UrlAPI=https://example.com/api.php
+UrlAPI=https://api.kucharskov.pl/cgm/
 ```
 
 Po odświeżeniu motywu Rainmeter powinien rozpocząć regularne pobieranie danych za pomocą `Plugin=WebParser` i wyświetlać aktualny poziom glukozy.
